@@ -1,0 +1,3 @@
+# Greasemonkey scripts
+
+A place to hold useful greasemonkey scripts...
