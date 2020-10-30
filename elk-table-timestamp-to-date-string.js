@@ -28,7 +28,7 @@ function transformColumnValues(columnKey, transFn) {
     const tdList = row.querySelectorAll('td');
     //  elk table body has 1 more column offset
     const targetEl = tdList[columnIndex + 1];
-    if (!targetEl) {
+    if (!targetEl || targetEl.__trans) {
       return;
     }
     const span = targetEl.querySelector('span');
@@ -36,6 +36,11 @@ function transformColumnValues(columnKey, transFn) {
       targetEl.removeChild(span);
     }
     targetEl.innerText = transFn(targetEl.innerText);
+    //  mark this to prevent re-trans
+    targetEl.__trans = true;
+    if (span) {
+      targetEl.appendChild(span);
+    }
   })
 }
 
